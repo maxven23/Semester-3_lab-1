@@ -29,19 +29,12 @@ public:
 
 	void Sort(ArraySequence<T>* arr) override {
 
-		//T temp;
-
 		for (int i = 0; i < arr->GetSize(); i++) {
 			for (int j = 0; j < arr->GetSize() - i - 1; j++) {
 				if (arr->Get(j) > arr->Get(j + 1)) {
 
 					this->Swap(arr, j, j + 1);
 					++iterations;
-					/*
-					temp = arr->Get(j);
-					arr->Set(j, arr->Get(j + 1));
-					arr->Set(j + 1, temp);
-					*/
 
 				}
 				++comparisons;
@@ -95,16 +88,6 @@ public:
 			quickSort(arr, i, right);
 
 	}
-
-
-	
-protected:
-	void Swap(ArraySequence<T>* seq, int index1, int index2)
-	{
-		T item = seq->Get(index1);
-		seq->Set(index1, seq->Get(index2));
-		seq->Set(index2, item);
-	}
 };
 
 
@@ -135,7 +118,6 @@ public:
 				}
 			}
 			arr->Set(key, temp);
-			//++iterations;
 		}
 	}
 };
@@ -143,7 +125,7 @@ public:
 
 template <class T>
 // Сортировка простым выбором
-class chooseSorter : ISorter<T> 
+class selectSorter : ISorter<T> 
 {
 public:
 	int iterations = 0;
@@ -187,7 +169,7 @@ public:
 		for (step = arr->GetSize() / 2; step > 0; step /= 2)
 			// Перечисление элементов, которые сортируются на определённом шаге
 			for (i = step; i < arr->GetSize(); i++) {
-				// Перестановка элементов внутри подсписка, пока i-тый не будет отсортирован
+				// Перестановка элементов внутри подмассива, пока i-тый не будет отсортирован
 				++comparisons;
 				for (j = i - step; j >= 0 && (arr->Get(j) > arr->Get(j + step)); j -= step, ++comparisons)
 				{

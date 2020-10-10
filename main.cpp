@@ -67,14 +67,14 @@ int main(void) {
 
 	// Сортировка методом простого выбора
 	
-	chooseSorter<int>* chSorter = new chooseSorter<int>();
+	selectSorter<int>* selSorter = new selectSorter<int>();
 
-	cout << endl << "      simpleChoiceSort: " << endl << endl;
+	cout << endl << "      simpleSelectionSort: " << endl << endl;
 	Timer* timer3 = new Timer();
-	chSorter->Sort(seq);
+	selSorter->Sort(seq);
 	delete timer3;
-	iterations = chSorter->iterations;
-	comporations = chSorter->comporations;
+	iterations = selSorter->iterations;
+	comporations = selSorter->comporations;
 	
 	output(seq, iterations, comporations);
 	coution();
@@ -112,7 +112,7 @@ int main(void) {
 	coution();
 	*/
 
-	NewMenu<double>();
+	NewMenu<int>();
 
 	return 0;
 }

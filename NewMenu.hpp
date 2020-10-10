@@ -26,7 +26,7 @@ void output(ArraySequence<T>* seq, int iter, int compor) {
 	cout << "      Number of elements: " << seq->GetSize() << endl;
 	cout << "      Number of iterations: " << iter << endl;
 	cout << "      Number of comparisons: " << compor << endl;
-
+	
 	cout << endl << "------------------------------(NEW) Sorted Array---------------------------------" << endl << endl;
 	cout << "[";
 	for (int i = 0; i < seq->GetSize() - 1; ++i) {
@@ -36,7 +36,7 @@ void output(ArraySequence<T>* seq, int iter, int compor) {
 	}
 	cout << seq->Get(seq->GetSize() - 1) << "]" << endl << endl;
 	cout << "----------------------------------------------------------------------------------" << endl;
-
+	
 }
 
 void coution() {
@@ -88,14 +88,14 @@ void randomFill(ArraySequence<T>* arr) {
 }
 
 
-void ChooseSortMenu() {
+void selectSortMenu() {
 	
 	system("cls");
-	cout << "--------------CHOOSE SORT--------------" << endl;
+	cout << "--------------select SORT--------------" << endl;
 	cout << endl;
 	cout << "          1. Bubble Sort" << endl;
 	cout << "          2. Insertions Sort" << endl;
-	cout << "          3. Simple Choise Sort" << endl;
+	cout << "          3. Simple Selection Sort" << endl;
 	cout << "          4. Shell Sort" << endl;
 	cout << "          5. Quick Sort" << endl;
 	cout << "          " << endl;
@@ -110,7 +110,7 @@ void ChooseSortMenu() {
 }
 
 template <class T>
-void ChooseSort(ArraySequence<T>* seq) {
+void selectSort(ArraySequence<T>* seq) {
 	
 	int CHOICE = -1;
 	int iterations;
@@ -120,7 +120,7 @@ void ChooseSort(ArraySequence<T>* seq) {
 		int CHOICE = -1;
 		while (CHOICE == -1) {
 
-			ChooseSortMenu();
+			selectSortMenu();
 			cout << "      ";
 			cin >> CHOICE;
 			if (CHOICE < 0 || CHOICE > 9) {
@@ -175,14 +175,14 @@ void ChooseSort(ArraySequence<T>* seq) {
 
 			printArr(seq);
 
-			chooseSorter<T>* chSorter = new chooseSorter<T>();
+			selectSorter<T>* selSorter = new selectSorter<T>();
 
-			cout << endl << "      simpleChoiceSort: " << endl << endl;
+			cout << endl << "      simpleSelectionSort: " << endl << endl;
 			Timer* timer3 = new Timer();
-			chSorter->Sort(seq);
+			selSorter->Sort(seq);
 			delete timer3;
-			iterations = chSorter->iterations;
-			comparisons = chSorter->comparisons;
+			iterations = selSorter->iterations;
+			comparisons = selSorter->comparisons;
 
 			output(seq, iterations, comparisons);
 			coution();
@@ -270,6 +270,8 @@ int creatingMenu(ArraySequence<T>* arr) {
 		cout << endl;
 		cout << "         0. Back" << endl;
 		cout << endl;
+		cout << "-------------------------------------------------" << endl;
+		cout << endl;
 		cout << "         ";
 
 		cin >> FILL;
@@ -318,7 +320,9 @@ void StartMenu() {
 		cout << endl;
 		cout << "         0. Exit" << endl;
 		cout << endl;
-		cout << "         ";
+		cout << "----------------------------------------" << endl;
+		cout << endl;
+		cout << "  Input: ";
 
 		cin >> INPUT;
 
@@ -359,7 +363,7 @@ void StartMenu() {
 					int NEXT = creatingMenu<T>(arr);
 
 					if (NEXT == 0) {
-						ChooseSort(arr);
+						selectSort(arr);
 					}
 
 					else {
