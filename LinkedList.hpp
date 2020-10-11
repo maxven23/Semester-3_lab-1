@@ -69,15 +69,14 @@ public:
 	T Get(int index) {
 		if (index < 0 || index >= this->size)
 			throw std::exception("INDEX ERROR: Index out of range");
-		int sch = 0;
+
 		Node<T>* temp;
 		temp = this->head;
-		while (temp != nullptr) {
-			if (sch == index)
-				return temp->item;
+		for (int i = 0; i < index; i++) {
 			temp = temp->pnext;
-			++sch;
 		}
+		return temp->item;
+		
 	};
 
 	// Получение первого и последнего элемента соотвественно (с головы)
@@ -88,6 +87,16 @@ public:
 	T GetLast() {
 		return Get(this->size - 1);
 	};
+
+	void Set(int index, T item) {
+
+		Node<T>* temp = this->head;
+
+		for (int i = 0; i < index; i++) {
+			temp = temp->pnext;
+		}
+		temp->item = item;
+	}
 
 	// Добавление узла в начало списка
 	void Append(T item) {

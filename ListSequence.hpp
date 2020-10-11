@@ -57,6 +57,10 @@ public:
 		return this->items->GetFirst();
 	};
 
+	virtual void Set(int index, T item) override {
+		this->items->Set(index, item);
+	}
+
 	// Добавление элемента в начало
 	virtual void Append(T item) override {
 		this->items->Append(item);

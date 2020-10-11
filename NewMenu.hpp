@@ -9,8 +9,8 @@ void pressAnyButton() {
 }
 
 template <class T>
-void printArr(ArraySequence<T>* seq) {
-	cout << "-----------------------------------Your Array-------------------------------------" << endl;
+void printArr(Sequence<T>* seq) {
+	cout << "---------------------------------Your Sequence------------------------------------" << endl;
 	cout << endl;
 	cout << "[";
 	for (int i = 0; i < seq->GetSize() - 1; ++i) {
@@ -21,13 +21,13 @@ void printArr(ArraySequence<T>* seq) {
 }
 
 template <class T>
-void output(ArraySequence<T>* seq, int iter, int compor) {
+void output(Sequence<T>* seq, int iter, int compor) {
 
 	cout << "      Number of elements: " << seq->GetSize() << endl;
 	cout << "      Number of iterations: " << iter << endl;
 	cout << "      Number of comparisons: " << compor << endl;
 	
-	cout << endl << "------------------------------(NEW) Sorted Array---------------------------------" << endl << endl;
+	cout << endl << "-----------------------------(NEW) Sorted Sequence-------------------------------" << endl << endl;
 	cout << "[";
 	for (int i = 0; i < seq->GetSize() - 1; ++i) {
 
@@ -46,7 +46,7 @@ void coution() {
 }
 
 template <class T>
-void manualFill(ArraySequence<T>* arr) {
+void manualFill(Sequence<T>* arr) {
 
 	T item;
 
@@ -69,10 +69,34 @@ void manualFill(ArraySequence<T>* arr) {
 	
 }
 
+template <class T>
+void manualFillList(Sequence<T>* seq, int size) {
+
+	T item;
+
+	for (int i = 0; i < size; i++) {
+		system("cls");
+		item = { 0 };
+
+		cout << endl;
+		cout << "       Enter element #" << i + 1 << ":  ";
+
+		cin >> item;
+		//seq->Append(item);
+		seq->Prepend(item);
+
+	}
+
+	printArr(seq);
+	cout << endl;
+
+	pressAnyButton();
+
+}
 
 // Рандомно заполняется только массив с целыми/вещественными числами (вещ. - ((((double)rand() % 100000) - 15000) / 10000) )
 template <class T>
-void randomFill(ArraySequence<T>* arr) {
+void randomFill(Sequence<T>* arr) {
 
 	for (int i = 0; i < arr->GetSize(); ++i) {
 
@@ -87,6 +111,22 @@ void randomFill(ArraySequence<T>* arr) {
 
 }
 
+template <class T>
+void randomFillList(Sequence<T>* seq, int size) {
+
+	for (int i = 0; i < size; ++i) {
+
+		//seq->Append((rand() % 100000) - 15000);
+		seq->Prepend((rand() % 100000) - 15000);
+
+	}
+
+	printArr(seq);
+	cout << endl;
+
+	pressAnyButton();
+
+}
 
 void selectSortMenu() {
 	
@@ -110,7 +150,7 @@ void selectSortMenu() {
 }
 
 template <class T>
-void selectSort(ArraySequence<T>* seq) {
+void selectSort(Sequence<T>* seq) {
 	
 	int CHOICE = -1;
 	int iterations;
@@ -121,7 +161,7 @@ void selectSort(ArraySequence<T>* seq) {
 		while (CHOICE == -1) {
 
 			selectSortMenu();
-			cout << "      ";
+			cout << "Input:  ";
 			cin >> CHOICE;
 			if (CHOICE < 0 || CHOICE > 9) {
 				CHOICE = -1;
@@ -255,7 +295,7 @@ void selectSort(ArraySequence<T>* seq) {
 }
 
 template  <class T>
-int creatingMenu(ArraySequence<T>* arr) {
+int creatingMenu(Sequence<T>* arr) {
 	system("cls");
 
 	bool ON1 = true;
@@ -272,7 +312,7 @@ int creatingMenu(ArraySequence<T>* arr) {
 		cout << endl;
 		cout << "-------------------------------------------------" << endl;
 		cout << endl;
-		cout << "         ";
+		cout << "Input:   ";
 
 		cin >> FILL;
 
@@ -302,6 +342,56 @@ int creatingMenu(ArraySequence<T>* arr) {
 
 		}
 	}
+}
+
+template  <class T>
+int creatingMenuList(ListSequence<T>* seq, int SIZE) {
+	system("cls");
+
+	bool ON1 = true;
+	int FILL = -1;
+
+	while (ON1) {
+		system("cls");
+
+		cout << endl;
+		cout << "         1. Fill in the array manually" << endl;
+		cout << "         2. Fill in the array randomly" << endl;
+		cout << endl;
+		cout << "         0. Back" << endl;
+		cout << endl;
+		cout << "-------------------------------------------------" << endl;
+		cout << endl;
+		cout << "         ";
+
+		cin >> FILL;
+
+		if (FILL < 0 || FILL > 2) {
+			FILL = -1;
+		}
+
+		else if (FILL == 1) {
+			system("cls");
+
+			manualFillList<T>(seq, SIZE);
+			ON1 = false;
+		}
+
+		else if (FILL == 2) {
+			system("cls");
+
+			randomFillList<T>(seq, SIZE);
+			ON1 = false;
+		}
+
+		else if (FILL == 0) {
+			system("cls");
+
+			int BACK = -1;
+			return BACK;
+
+		}
+	}
 	return 0;
 }
 
@@ -315,7 +405,7 @@ void StartMenu() {
 		system("cls");
 
 		cout << endl;
-		cout << "         1. Create new array" << endl;
+		cout << "         1. Create new sequence" << endl;
 		cout << "         2. Make tests" << endl;
 		cout << endl;
 		cout << "         0. Exit" << endl;
@@ -342,14 +432,14 @@ void StartMenu() {
 		}
 
 		else if (INPUT == 1) {
-
+			int TYPE_SEQ = -1;
 			int SIZE = -1;
 
 			while (SIZE == -1) {
 				system("cls");
 
 				cout << endl;
-				cout << "        Enter SIZE of your array:  ";
+				cout << "        Enter SIZE of your sequence:  ";
 
 				cin >> SIZE;
 
@@ -358,17 +448,64 @@ void StartMenu() {
 				}
 
 				else {
+					while (TYPE_SEQ == -1) {
+						system("cls");
+						int NEXT = 0;
 
-					ArraySequence<T>* arr = new ArraySequence<T>(SIZE);
-					int NEXT = creatingMenu<T>(arr);
+						cout << endl;
+						cout << "        Choose type of your sequence:  " << endl;
+						cout << endl;
+						cout << "        1. ArraySequence" << endl;
+						cout << "        2. ListSequence" << endl;
+						cout << endl;
+						cout << "        0. Exit" << endl;
+						cout << endl;
+						cout << "----------------------------------------" << endl;
+						cout << endl;
 
-					if (NEXT == 0) {
-						selectSort(arr);
-					}
+						cout << "Input:  ";
+						cin >> TYPE_SEQ;
 
-					else {
-						delete arr;
-						break;
+						if (TYPE_SEQ < 0 || TYPE_SEQ > 2) {
+							TYPE_SEQ = -1;
+						}
+
+						else if (TYPE_SEQ == 0) {
+							system("cls");
+							cout << endl;
+							cout << "         Closing . . ." << endl;
+							exit(1);
+						}
+						
+						else if (TYPE_SEQ == 1) {
+							
+							ArraySequence<int>* arr = new ArraySequence<int>(SIZE);
+							NEXT = creatingMenu<int>(arr);
+
+							if (NEXT == 0) {
+								selectSort(arr);
+							}
+
+							else {
+								delete arr;
+								break;
+							}
+						}
+
+						else if (TYPE_SEQ == 2) {
+
+							ListSequence<int>* seq = new ListSequence<int>();
+							NEXT = creatingMenuList<int>(seq, SIZE);
+
+							if (NEXT == 0) {
+								selectSort(seq);
+							}
+
+							else {
+								delete seq;
+								break;
+							}
+						}
 					}
 				}
 			}

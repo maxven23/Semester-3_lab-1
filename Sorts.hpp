@@ -7,10 +7,10 @@ template <class T>
 class ISorter {
 public:
 
-	virtual void Sort(ArraySequence<T>* input) = 0;
+	virtual void Sort(Sequence<T>* input) = 0;
 
 protected:
-	void Swap(ArraySequence<T>* seq, int index1, int index2)
+	void Swap(Sequence<T>* seq, int index1, int index2)
 	{
 		T item = seq->Get(index1);
 		seq->Set(index1, seq->Get(index2));
@@ -27,7 +27,7 @@ public:
 	int iterations = 0;
 	int comparisons = 0;
 
-	void Sort(ArraySequence<T>* arr) override {
+	void Sort(Sequence<T>* arr) override {
 
 		for (int i = 0; i < arr->GetSize(); i++) {
 			for (int j = 0; j < arr->GetSize() - i - 1; j++) {
@@ -52,11 +52,11 @@ public:
 	int iterations;
 	int comparisons = 0;
 
-	void Sort(ArraySequence<T>* arr) override {
+	void Sort(Sequence<T>* arr) override {
 		quickSort(arr, 0, arr->GetSize() - 1);
 	}
 
-	void quickSort(ArraySequence<T>* arr, int left, int right) {
+	void quickSort(Sequence<T>* arr, int left, int right) {
 
 		int i = left, j = right;
 
@@ -99,7 +99,7 @@ public:
 	int iterations = 0;
 	int comparisons = 0;
 
-	void Sort(ArraySequence<T>* arr) override {
+	void Sort(Sequence<T>* arr) override {
 
 		T temp;
 
@@ -131,7 +131,7 @@ public:
 	int iterations = 0;
 	int comparisons = 0;
 
-	void Sort(ArraySequence<T>* arr) override {
+	void Sort(Sequence<T>* arr) override {
 
 		for (int startIndex = 0; startIndex < arr->GetSize(); ++startIndex) {
 
@@ -160,7 +160,7 @@ public:
 	int iterations = 0;
 	int comparisons = 0;
 
-	void Sort(ArraySequence<T>* arr) override {
+	void Sort(Sequence<T>* arr) override {
 
 		int step, i, j;
 		//T tmp;
@@ -183,8 +183,8 @@ public:
 };
 
 
-template <typename T> 
-void shuffle(ArraySequence<T>* arr) {
+template <class T> 
+void shuffle(Sequence<T>* arr) {
 
 	srand(time(NULL));
 

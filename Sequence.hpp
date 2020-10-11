@@ -17,6 +17,7 @@ public:
 	virtual T GetFirst() const = 0;
 
 	// ќсновные операции (не требуютс€ в представлении)
+	virtual void Set(int index, T item) = 0;
 	virtual void Append(T item) = 0;
 	virtual void Prepend(T item) = 0;
 	virtual void Insert(int index,  T item) = 0;
