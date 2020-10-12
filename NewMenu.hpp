@@ -3,6 +3,7 @@
 #include "Sorts.hpp"
 #include "Test.hpp"
 
+
 void pressAnyButton() {
 	cout << "Press any button to continue . . ." << endl;
 	system("pause>>VOID");
@@ -153,6 +154,7 @@ template <class T>
 void selectSort(Sequence<T>* seq) {
 	
 	int CHOICE = -1;
+	int CHOICE1 = -1;
 	int iterations;
 	int comparisons;
 
@@ -171,103 +173,324 @@ void selectSort(Sequence<T>* seq) {
 
 
 		if (CHOICE == 1) {
+			CHOICE1 = -1;
 			system("cls");
 
-			printArr(seq);
-
 			bubbleSorter<T>* sorter = new bubbleSorter<T>();
+			
+			while (CHOICE1 == -1) {
 
-			cout << endl << "      bubbleSort: " << endl << endl;
-			Timer* timer1 = new Timer();
-			sorter->Sort(seq);
-			delete timer1;
-			iterations = sorter->iterations;
-			comparisons = sorter->comparisons;
+				system("cls");
 
-			output(seq, iterations, comparisons);
-			coution();
+				cout << endl;
+				cout << "        Choose order of sorting: " << endl;
+				cout << endl;
+				cout << "        1. Sort in ascending" << endl;
+				cout << "        2. Sort in descending" << endl;
+				cout << endl;
+				cout << "---------------------------------------" << endl;
+				cout << endl;
+				cout << "Input:  ";
 
-			pressAnyButton();
+				cin >> CHOICE1;
+
+				if (CHOICE1 < 1 || CHOICE1 > 2) {
+					CHOICE1 = -1;
+				}
+
+				else if (CHOICE1 == 1) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      bubbleSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					sorter->Sort(seq, bigger);
+					delete timer1;
+					iterations = sorter->iterations;
+					comparisons = sorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+
+				else if (CHOICE1 == 2) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      bubbleSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					sorter->Sort(seq, lower);
+					delete timer1;
+					iterations = sorter->iterations;
+					comparisons = sorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+			}
 		}
 
 		else if (CHOICE == 2) {
+			CHOICE1 = -1;
 			system("cls");
 
-			printArr(seq);
-
 			insertSorter<T>* insSorter = new insertSorter<T>();
+			while (CHOICE1 == -1) {
 
-			cout << endl << "      insertionSort: " << endl << endl;
-			Timer* timer2 = new Timer();
-			insSorter->Sort(seq);
-			delete timer2;
-			iterations = insSorter->iterations;
-			comparisons = insSorter->comparisons;
+				system("cls");
 
-			output(seq, iterations, comparisons);
-			coution();
+				cout << endl;
+				cout << "        Choose order of sorting: " << endl;
+				cout << endl;
+				cout << "        1. Sort in ascending" << endl;
+				cout << "        2. Sort in descending" << endl;
+				cout << endl;
+				cout << "---------------------------------------" << endl;
+				cout << endl;
+				cout << "Input:  ";
 
-			pressAnyButton();
+				cin >> CHOICE1;
+
+				if (CHOICE1 < 1 || CHOICE1 > 2) {
+					CHOICE1 = -1;
+				}
+
+				else if (CHOICE1 == 1) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      insertionSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					insSorter->Sort(seq, bigger);
+					delete timer1;
+					iterations = insSorter->iterations;
+					comparisons = insSorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+
+				else if (CHOICE1 == 2) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      insertionSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					insSorter->Sort(seq, lower);
+					delete timer1;
+					iterations = insSorter->iterations;
+					comparisons = insSorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+			}
 		}
 
 		else if (CHOICE == 3) {
 			system("cls");
-
-			printArr(seq);
+			CHOICE1 = -1;
 
 			selectSorter<T>* selSorter = new selectSorter<T>();
 
-			cout << endl << "      simpleSelectionSort: " << endl << endl;
-			Timer* timer3 = new Timer();
-			selSorter->Sort(seq);
-			delete timer3;
-			iterations = selSorter->iterations;
-			comparisons = selSorter->comparisons;
+			while (CHOICE1 == -1) {
 
-			output(seq, iterations, comparisons);
-			coution();
+				system("cls");
 
-			pressAnyButton();
+				cout << endl;
+				cout << "        Choose order of sorting: " << endl;
+				cout << endl;
+				cout << "        1. Sort in ascending" << endl;
+				cout << "        2. Sort in descending" << endl;
+				cout << endl;
+				cout << "---------------------------------------" << endl;
+				cout << endl;
+				cout << "Input:  ";
+
+				cin >> CHOICE1;
+
+				if (CHOICE1 < 1 || CHOICE1 > 2) {
+					CHOICE1 = -1;
+				}
+
+				else if (CHOICE1 == 1) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      simpleSelectionSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					selSorter->Sort(seq, bigger);
+					delete timer1;
+					iterations = selSorter->iterations;
+					comparisons = selSorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+
+				else if (CHOICE1 == 2) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      simpleSelectionSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					selSorter->Sort(seq, lower);
+					delete timer1;
+					iterations = selSorter->iterations;
+					comparisons = selSorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+			}
 		}
 
 		else if (CHOICE == 4) {
 			system("cls");;
-			
-			printArr(seq);
+			CHOICE1 = -1;
 
 			shellSorter<T>* shSorter = new shellSorter<T>();
 
-			cout << endl << "      ShellSort: " << endl << endl;
-			Timer* timer4 = new Timer();
-			shSorter->Sort(seq);
-			delete timer4;
-			iterations = shSorter->iterations;
-			comparisons = shSorter->comparisons;
+			while (CHOICE1 == -1) {
 
-			output(seq, iterations, comparisons);
-			coution();
+				system("cls");
 
-			pressAnyButton();
+				cout << endl;
+				cout << "        Choose order of sorting: " << endl;
+				cout << endl;
+				cout << "        1. Sort in ascending" << endl;
+				cout << "        2. Sort in descending" << endl;
+				cout << endl;
+				cout << "---------------------------------------" << endl;
+				cout << endl;
+				cout << "Input:  ";
+
+				cin >> CHOICE1;
+
+				if (CHOICE1 < 1 || CHOICE1 > 2) {
+					CHOICE1 = -1;
+				}
+
+				else if (CHOICE1 == 1) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      ShellSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					shSorter->Sort(seq, bigger);
+					delete timer1;
+					iterations = shSorter->iterations;
+					comparisons = shSorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+
+				else if (CHOICE1 == 2) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      ShellSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					shSorter->Sort(seq, lower);
+					delete timer1;
+					iterations = shSorter->iterations;
+					comparisons = shSorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+			}
 		}
 
 		else if (CHOICE == 5) {
 			system("cls");
+			CHOICE1 = -1;
 
 			printArr(seq);
 
 			quickSorter<T>* qSorter = new quickSorter<T>();
 
-			cout << endl << "      quickSort: " << endl << endl;
-			Timer* timer5 = new Timer();
-			qSorter->Sort(seq);
-			delete timer5;
-			iterations = qSorter->iterations;
-			comparisons = qSorter->comparisons;
+			while (CHOICE1 == -1) {
 
-			output(seq, iterations, comparisons);
-			coution();
+				system("cls");
 
-			pressAnyButton();
+				cout << endl;
+				cout << "        Choose order of sorting: " << endl;
+				cout << endl;
+				cout << "        1. Sort in ascending" << endl;
+				cout << "        2. Sort in descending" << endl;
+				cout << endl;
+				cout << "---------------------------------------" << endl;
+				cout << endl;
+				cout << "Input:  ";
+
+				cin >> CHOICE1;
+
+				if (CHOICE1 < 1 || CHOICE1 > 2) {
+					CHOICE1 = -1;
+				}
+
+				else if (CHOICE1 == 1) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      quickSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					qSorter->Sort(seq, bigger);
+					delete timer1;
+					iterations = qSorter->iterations;
+					comparisons = qSorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+
+				else if (CHOICE1 == 2) {
+					system("cls");
+
+					printArr(seq);
+
+					cout << endl << "      quickSort: " << endl << endl;
+					Timer* timer1 = new Timer();
+					qSorter->Sort(seq, lower);
+					delete timer1;
+					iterations = qSorter->iterations;
+					comparisons = qSorter->comparisons;
+
+					output(seq, iterations, comparisons);
+					coution();
+
+					pressAnyButton();
+				}
+			}
 		}
 
 		else if (CHOICE == 6) {

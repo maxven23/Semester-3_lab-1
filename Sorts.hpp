@@ -7,7 +7,7 @@ template <class T>
 class ISorter {
 public:
 
-	virtual void Sort(Sequence<T>* input) = 0;
+	virtual void Sort(Sequence<T>* input, bool(*comp)(T, T)) = 0;
 
 protected:
 	void Swap(Sequence<T>* seq, int index1, int index2)
@@ -27,11 +27,11 @@ public:
 	int iterations = 0;
 	int comparisons = 0;
 
-	void Sort(Sequence<T>* arr) override {
+	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
 		for (int i = 0; i < arr->GetSize(); i++) {
 			for (int j = 0; j < arr->GetSize() - i - 1; j++) {
-				if (arr->Get(j) > arr->Get(j + 1)) {
+				if (comp(arr->Get(j), arr->Get(j + 1))) {
 
 					this->Swap(arr, j, j + 1);
 					++iterations;
@@ -52,22 +52,22 @@ public:
 	int iterations;
 	int comparisons = 0;
 
-	void Sort(Sequence<T>* arr) override {
-		quickSort(arr, 0, arr->GetSize() - 1);
+	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
+		quickSort(arr, comp, 0, arr->GetSize() - 1);
 	}
 
-	void quickSort(Sequence<T>* arr, int left, int right) {
+	void quickSort(Sequence<T>* arr, bool(*comp)(T, T), int left, int right) {
 
 		int i = left, j = right;
 
 		T middle = arr->Get((left + right) / 2);
 
 		while (i <= j) {
-			while (arr->Get(i) < middle) {
+			while (!(comp(arr->Get(i), middle)) && !(arr->Get(i) == middle)) {
 				comparisons++;
 				i++;
 			}
-			while (arr->Get(j) > middle) {
+			while ((comp(arr->Get(j), middle))) {
 				comparisons++;
 				j--;
 			}
@@ -83,9 +83,9 @@ public:
 
 		// Рекурсивный вызов
 		if (left < j)
-			quickSort(arr, left, j);
+			quickSort(arr, comp, left, j);
 		if (i < right)
-			quickSort(arr, i, right);
+			quickSort(arr, comp, i, right);
 
 	}
 };
@@ -99,7 +99,7 @@ public:
 	int iterations = 0;
 	int comparisons = 0;
 
-	void Sort(Sequence<T>* arr) override {
+	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
 		T temp;
 
@@ -110,7 +110,7 @@ public:
 			for (int j = i + 1; j > 0; j--)
 			{
 				++comparisons;
-				if (temp < arr->Get(j - 1))
+				if (!(comp(temp, arr->Get(j - 1))) && !(temp == arr->Get(j - 1)))
 				{
 					arr->Set(j, arr->Get(j - 1));
 					key = j - 1;
@@ -131,7 +131,7 @@ public:
 	int iterations = 0;
 	int comparisons = 0;
 
-	void Sort(Sequence<T>* arr) override {
+	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
 		for (int startIndex = 0; startIndex < arr->GetSize(); ++startIndex) {
 
@@ -139,7 +139,7 @@ public:
 
 			for (int currentIndex = startIndex + 1; currentIndex < arr->GetSize(); ++currentIndex) {
 
-				if (arr->Get(currentIndex) < arr->Get(smallestIndex)) {
+				if (!(comp(arr->Get(currentIndex), arr->Get(smallestIndex))) && !(arr->Get(currentIndex) == arr->Get(smallestIndex))) {
 					++comparisons;
 					smallestIndex = currentIndex;
 				}
@@ -160,7 +160,7 @@ public:
 	int iterations = 0;
 	int comparisons = 0;
 
-	void Sort(Sequence<T>* arr) override {
+	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
 		int step, i, j;
 		//T tmp;
@@ -171,7 +171,7 @@ public:
 			for (i = step; i < arr->GetSize(); i++) {
 				// Перестановка элементов внутри подмассива, пока i-тый не будет отсортирован
 				++comparisons;
-				for (j = i - step; j >= 0 && (arr->Get(j) > arr->Get(j + step)); j -= step, ++comparisons)
+				for (j = i - step; j >= 0 && (comp(arr->Get(j), arr->Get(j + step))); j -= step, ++comparisons)
 				{
 
 					this->Swap(arr, j, j + step);

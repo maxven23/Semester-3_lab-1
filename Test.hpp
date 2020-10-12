@@ -1,4 +1,5 @@
 #include "Headers.hpp"
+#include "Comp.hpp"
 
 template <class T>
 void printArrTest(ArraySequence<T>* seq) {
@@ -31,31 +32,31 @@ void Test() {
 	printArrTest(arr1);
 	
 	bubbleSorter<int>* bSorter = new bubbleSorter<int>();
-	bSorter->Sort(arr1);
+	bSorter->Sort(arr1, bigger);
 
 	shuffle<int>(arr1);
 
 
 	insertSorter<int>* insSorter = new insertSorter<int>();
-	insSorter->Sort(arr1);
+	insSorter->Sort(arr1, bigger);
 
 	shuffle<int>(arr1);
 
 
 	selectSorter<int>* selSorter = new selectSorter<int>();
-	selSorter->Sort(arr1);
+	selSorter->Sort(arr1, bigger);
 
 	shuffle<int>(arr1);
 
 
 	shellSorter<int>* shSorter = new shellSorter<int>();
-	shSorter->Sort(arr1);
+	shSorter->Sort(arr1, bigger);
 
 	shuffle<int>(arr1);
 
 
 	quickSorter<int>* qSorter = new quickSorter<int>();
-	qSorter->Sort(arr1);
+	qSorter->Sort(arr1, bigger);
 
 
 
