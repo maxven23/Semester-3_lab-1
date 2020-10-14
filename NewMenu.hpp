@@ -550,9 +550,8 @@ void selectSort(Sequence<T>* seq) {
 		else if (CHOICE == 0) {
 
 			system("cls");
-			delete seq;
-			cout << endl << "      Closing . . ." << endl;
-			exit(1);
+			break;
+
 		}
 	}
 }
@@ -749,10 +748,7 @@ void StartMenu() {
 								selectSort(arr);
 							}
 
-							else {
-								delete arr;
-								break;
-							}
+							delete arr;
 						}
 
 						else if (TYPE_SEQ == 2) {
@@ -764,10 +760,7 @@ void StartMenu() {
 								selectSort(seq);
 							}
 
-							else {
-								delete seq;
-								break;
-							}
+							delete seq;
 						}
 					}
 				}
