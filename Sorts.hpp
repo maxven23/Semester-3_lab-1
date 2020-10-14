@@ -163,7 +163,6 @@ public:
 	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
 		int step, i, j;
-		//T tmp;
 
 		// Выбор шага
 		for (step = arr->GetSize() / 2; step > 0; step /= 2)
@@ -195,13 +194,15 @@ void shuffle(Sequence<T>* arr) {
 		arr->Set(r, tmp);
 	}
 
-	cout << "----------------------------------Shuffled Array----------------------------------" << endl << endl;
+	if (arr->GetSize() <= 1000) {
+		cout << "----------------------------------Shuffled Array----------------------------------" << endl << endl;
 
-	cout << "[";
-	for (int i = 0; i < arr->GetSize() - 1; ++i) {
-		cout << arr->Get(i) << ",  ";
+		cout << "[";
+		for (int i = 0; i < arr->GetSize() - 1; ++i) {
+			cout << arr->Get(i) << ",  ";
+		}
+		cout << arr->Get(arr->GetSize() - 1) << "]" << endl << endl;
+
+		cout << "----------------------------------------------------------------------------------" << endl;
 	}
-	cout << arr->Get(arr->GetSize() - 1) << "]" << endl << endl;
-
-	cout << "----------------------------------------------------------------------------------" << endl;
 };

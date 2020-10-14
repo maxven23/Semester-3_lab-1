@@ -138,7 +138,7 @@ public:
 
 	// Удаление узла
 	void fPop() {
-		if (this->GetSize() == 0) {
+		if (this->head == nullptr) {
 			throw std::exception("INDEX ERROR: Empty list");
 		}
 		Node<T>* temp;
@@ -188,7 +188,7 @@ public:
 
 	// Деструктор
 	~LinkedList() {
-		while (this->size != 0)
+		while (this->size > 0)
 			fPop();
 	};
 

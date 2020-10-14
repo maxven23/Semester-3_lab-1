@@ -2,15 +2,14 @@
 #include "Timer.hpp"
 #include "Sorts.hpp"
 #include "Test.hpp"
+#include <vld.h>
 
 
-void pressAnyButton() {
-	cout << "Press any button to continue . . ." << endl;
-	system("pause>>VOID");
-}
+
 
 template <class T>
 void printArr(Sequence<T>* seq) {
+
 	cout << "---------------------------------Your Sequence------------------------------------" << endl;
 	cout << endl;
 	cout << "[";
@@ -19,6 +18,7 @@ void printArr(Sequence<T>* seq) {
 	}
 	cout << seq->Get(seq->GetSize() - 1) << "]" << endl << endl;
 	cout << "----------------------------------------------------------------------------------" << endl;
+
 }
 
 template <class T>
@@ -28,16 +28,18 @@ void output(Sequence<T>* seq, int iter, int compor) {
 	cout << "      Number of iterations: " << iter << endl;
 	cout << "      Number of comparisons: " << compor << endl;
 	
-	cout << endl << "-----------------------------(NEW) Sorted Sequence-------------------------------" << endl << endl;
-	cout << "[";
-	for (int i = 0; i < seq->GetSize() - 1; ++i) {
+	if (seq->GetSize() <= 1000) {
 
-		cout << seq->Get(i) << ",  ";
+		cout << endl << "-----------------------------(NEW) Sorted Sequence-------------------------------" << endl << endl;
+		cout << "[";
+		for (int i = 0; i < seq->GetSize() - 1; ++i) {
 
+			cout << seq->Get(i) << ",  ";
+
+		}
+		cout << seq->Get(seq->GetSize() - 1) << "]" << endl << endl;
+		cout << "----------------------------------------------------------------------------------" << endl;
 	}
-	cout << seq->Get(seq->GetSize() - 1) << "]" << endl << endl;
-	cout << "----------------------------------------------------------------------------------" << endl;
-	
 }
 
 void coution() {
@@ -63,7 +65,10 @@ void manualFill(Sequence<T>* arr) {
 
 	}
 
-	printArr(arr);
+	if (arr->GetSize() <= 1000) {
+		printArr(arr);
+	}
+
 	cout << endl;
 
 	pressAnyButton();
@@ -88,7 +93,10 @@ void manualFillList(Sequence<T>* seq, int size) {
 
 	}
 
-	printArr(seq);
+	if (size <= 1000) {
+		printArr(seq);
+	}
+
 	cout << endl;
 
 	pressAnyButton();
@@ -101,11 +109,16 @@ void randomFill(Sequence<T>* arr) {
 
 	for (int i = 0; i < arr->GetSize(); ++i) {
 
-		arr->Set(i, (rand() % 100000) - 15000);
+		arr->Set(i, i);
 
 	}
 
-	printArr(arr);
+	shuffle(arr);
+
+	if (arr->GetSize() <= 1000) {
+		printArr(arr);
+	}
+
 	cout << endl;
 
 	pressAnyButton();
@@ -118,12 +131,13 @@ void randomFillList(Sequence<T>* seq, int size) {
 	for (int i = 0; i < size; ++i) {
 
 		//seq->Append((rand() % 100000) - 15000);
-		seq->Prepend((rand() % 100000) - 15000);
+		seq->Prepend(i);
 
 	}
 
-	printArr(seq);
-	cout << endl;
+	if (size <= 1000) {
+		printArr(seq);
+	}
 
 	pressAnyButton();
 
@@ -201,7 +215,10 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 1) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
+
 
 					cout << endl << "      bubbleSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -219,7 +236,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 2) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      bubbleSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -234,6 +253,7 @@ void selectSort(Sequence<T>* seq) {
 					pressAnyButton();
 				}
 			}
+			delete sorter;
 		}
 
 		else if (CHOICE == 2) {
@@ -264,7 +284,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 1) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      insertionSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -282,7 +304,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 2) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      insertionSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -297,6 +321,7 @@ void selectSort(Sequence<T>* seq) {
 					pressAnyButton();
 				}
 			}
+			delete insSorter;
 		}
 
 		else if (CHOICE == 3) {
@@ -328,7 +353,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 1) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      simpleSelectionSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -346,7 +373,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 2) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      simpleSelectionSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -361,6 +390,7 @@ void selectSort(Sequence<T>* seq) {
 					pressAnyButton();
 				}
 			}
+			delete selSorter;
 		}
 
 		else if (CHOICE == 4) {
@@ -392,7 +422,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 1) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      ShellSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -410,7 +442,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 2) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      ShellSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -425,13 +459,12 @@ void selectSort(Sequence<T>* seq) {
 					pressAnyButton();
 				}
 			}
+			delete shSorter;
 		}
 
 		else if (CHOICE == 5) {
 			system("cls");
 			CHOICE1 = -1;
-
-			printArr(seq);
 
 			quickSorter<T>* qSorter = new quickSorter<T>();
 
@@ -458,7 +491,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 1) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      quickSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -476,7 +511,9 @@ void selectSort(Sequence<T>* seq) {
 				else if (CHOICE1 == 2) {
 					system("cls");
 
-					printArr(seq);
+					if (seq->GetSize() <= 1000) {
+						printArr(seq);
+					}
 
 					cout << endl << "      quickSort: " << endl << endl;
 					Timer* timer1 = new Timer();
@@ -491,6 +528,7 @@ void selectSort(Sequence<T>* seq) {
 					pressAnyButton();
 				}
 			}
+			delete qSorter;
 		}
 
 		else if (CHOICE == 6) {
@@ -510,7 +548,9 @@ void selectSort(Sequence<T>* seq) {
 		}
 
 		else if (CHOICE == 0) {
+
 			system("cls");
+			delete seq;
 			cout << endl << "      Closing . . ." << endl;
 			exit(1);
 		}

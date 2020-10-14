@@ -151,7 +151,6 @@ public:
 
 	// Деструктор
 	~ListSequence() {
-		while (this->size != 0)
-			this->items->fPop();
+		delete this->items;
 	};
 };
