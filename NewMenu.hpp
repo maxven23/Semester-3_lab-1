@@ -27,7 +27,11 @@ void output(Sequence<T>* seq, int iter, int compor) {
 	cout << "      Number of elements: " << seq->GetSize() << endl;
 	cout << "      Number of iterations: " << iter << endl;
 	cout << "      Number of comparisons: " << compor << endl;
-	
+
+}
+
+template <class T>
+void sorterSeq(Sequence<T>* seq) {
 	if (seq->GetSize() <= 1000) {
 
 		cout << endl << "-----------------------------(NEW) Sorted Sequence-------------------------------" << endl << endl;
@@ -173,6 +177,7 @@ void selectSort(Sequence<T>* seq) {
 	int comparisons;
 
 	while (true) {
+		double duration;
 		int CHOICE = -1;
 		while (CHOICE == -1) {
 
@@ -219,14 +224,18 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-
-					cout << endl << "      bubbleSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					sorter->Sort(seq, bigger);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = sorter->iterations;
 					comparisons = sorter->comparisons;
 
+					sorterSeq(seq);
+					
+					cout << endl << "      bubbleSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -243,10 +252,16 @@ void selectSort(Sequence<T>* seq) {
 					cout << endl << "      bubbleSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					sorter->Sort(seq, lower);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = sorter->iterations;
 					comparisons = sorter->comparisons;
 
+					sorterSeq(seq);
+
+					cout << endl << "      bubbleSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -288,13 +303,18 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-					cout << endl << "      insertionSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					insSorter->Sort(seq, bigger);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = insSorter->iterations;
 					comparisons = insSorter->comparisons;
 
+					sorterSeq(seq);
+			
+					cout << endl << "      insertionSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -308,13 +328,18 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-					cout << endl << "      insertionSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					insSorter->Sort(seq, lower);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = insSorter->iterations;
 					comparisons = insSorter->comparisons;
 
+					sorterSeq(seq);
+
+					cout << endl << "      insertionSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -357,13 +382,18 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-					cout << endl << "      simpleSelectionSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					selSorter->Sort(seq, bigger);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = selSorter->iterations;
 					comparisons = selSorter->comparisons;
 
+					sorterSeq(seq);
+
+					cout << endl << "      simpleSelectionSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -377,13 +407,18 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-					cout << endl << "      simpleSelectionSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					selSorter->Sort(seq, lower);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = selSorter->iterations;
 					comparisons = selSorter->comparisons;
 
+					sorterSeq(seq);
+
+					cout << endl << "      simpleSelectionSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -426,13 +461,18 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-					cout << endl << "      ShellSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					shSorter->Sort(seq, bigger);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = shSorter->iterations;
 					comparisons = shSorter->comparisons;
 
+					sorterSeq(seq);
+
+					cout << endl << "      ShellSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -446,13 +486,18 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-					cout << endl << "      ShellSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					shSorter->Sort(seq, lower);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = shSorter->iterations;
 					comparisons = shSorter->comparisons;
 
+					sorterSeq(seq);
+
+					cout << endl << "      ShellSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -495,13 +540,20 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-					cout << endl << "      quickSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					qSorter->Sort(seq, bigger);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = qSorter->iterations;
 					comparisons = qSorter->comparisons;
 
+					coution();
+					sorterSeq(seq);
+					coution();
+
+					cout << endl << "      quickSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 
@@ -515,13 +567,20 @@ void selectSort(Sequence<T>* seq) {
 						printArr(seq);
 					}
 
-					cout << endl << "      quickSort: " << endl << endl;
 					Timer* timer1 = new Timer();
 					qSorter->Sort(seq, lower);
+					duration = timer1->Time();
 					delete timer1;
+
 					iterations = qSorter->iterations;
 					comparisons = qSorter->comparisons;
 
+					coution();
+					sorterSeq(seq);
+					coution();
+
+					cout << endl << "      quickSort: " << endl << endl;
+					cout << "      Duration of sorting: " << duration << "sec" << endl;
 					output(seq, iterations, comparisons);
 					coution();
 

@@ -3,7 +3,6 @@
 #include <chrono>
 
 
-
 class Timer {
 private:
 
@@ -16,11 +15,12 @@ public:
 		startTime = chrono::high_resolution_clock::now();
 	}
 
-	~Timer() {
+	double Time() {
 		endTime = chrono::high_resolution_clock::now();
 		chrono::duration<double> duration = endTime - startTime;
-
-		cout << "      Duration of sorting: " << duration.count() << "sec" << endl;
+		return duration.count();
 	}
+
+	~Timer() {}
 
 };

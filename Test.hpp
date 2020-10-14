@@ -7,19 +7,6 @@ void pressAnyButton() {
 	system("pause>>VOID");
 }
 
-template <class T>
-void printArrTest(ArraySequence<T>* seq) {
-	cout << "-----------------------------------Test Array-------------------------------------" << endl;
-	cout << endl;
-	cout << "[";
-	for (int i = 0; i < seq->GetSize() - 1; ++i) {
-		cout << seq->Get(i) << ",  ";
-	}
-	cout << seq->Get(seq->GetSize() - 1) << "]" << endl << endl;
-	cout << "----------------------------------------------------------------------------------" << endl;
-	pressAnyButton();
-}
-
 
 void correctTest(bool CORRECT, string SORT) {
 	cout.width(18);
@@ -33,6 +20,7 @@ void correctTest(bool CORRECT, string SORT) {
 		cout << " is INCORRECT" << endl;
 	}
 }
+
 
 template <class T>
 void TestSeq(Sequence<T>* arr1, string NAME) {
