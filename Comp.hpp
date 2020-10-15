@@ -1,13 +1,12 @@
 #include <iostream>
 
+// Не получалось использовать Greater, поэтому Bigger :^)
 template <class T>
 bool bigger(T first, T second) {
-	if (first > second) return 1;
-	else return 0;
+	return first > second;
 }
 
 template <class T>
 bool lower(T first, T second) {
-	if (first < second) return 1;
-	else return 0;
+	return first < second;
 }

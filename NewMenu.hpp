@@ -748,7 +748,7 @@ void StartMenu() {
 			system("cls");
 			cout << endl;
 			cout << "         Closing . . ." << endl;
-			exit(1);
+			exit(0);
 
 		}
 
