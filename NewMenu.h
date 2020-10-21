@@ -197,19 +197,19 @@ void sortComparasion(Sequence<T>* seq, ISorter<T>* sorter1, ISorter<T>* sorter2,
 	long long iter2 = sorter2->getIter();
 
 	cout << endl;
-	cout << "Number of elements: " << seq->GetSize() << endl;
+	cout << " Number of elements: " << seq->GetSize() << endl;
 	cout << endl;
-	cout << nameSort1 << endl;
-	cout << "Sorting Time: " << duration1 << " sec" << endl;
-	cout << "Number of Iterations: " << iter1 << endl;
-	cout << "Number of Comparasions: " << comp1 << endl;
+	cout << " " << nameSort1 << endl;
+	cout << "   Sorting Time: " << duration1 << " sec" << endl;
+	cout << "   Number of Iterations: " << iter1 << endl;
+	cout << "   Number of Comparasions: " << comp1 << endl;
 	cout << endl;
 	cout << "-----------------------" << endl;
 	cout << endl;
-	cout << nameSort2 << endl;
-	cout << "Sorting Time: " << duration2 << " sec" << endl;
-	cout << "Number of Iterations: " << iter2 << endl;
-	cout << "Number of Comparasions: " << comp2 << endl;
+	cout << "  " << nameSort2 << endl;
+	cout << "   Sorting Time: " << duration2 << " sec" << endl;
+	cout << "   Number of Iterations: " << iter2 << endl;
+	cout << "   Number of Comparasions: " << comp2 << endl;
 	cout << endl;
 
 	delete seq_copy;
@@ -671,7 +671,7 @@ void selectSort(Sequence<T>* seq) {
 				cout << "Input:  ";
 				cin >> First;
 
-				if (First < 0 || First > 5) {
+				if (First < 1 || First > 5) {
 					First = -1;
 				}
 			}
@@ -688,7 +688,7 @@ void selectSort(Sequence<T>* seq) {
 				cout << "Input:  ";
 				cin >> Second;
 
-				if (Second < 0 || Second > 5) {
+				if (Second < 1 || Second > 5) {
 					Second = -1;
 				}
 			}
@@ -697,7 +697,7 @@ void selectSort(Sequence<T>* seq) {
 			if (First == 1) {
 				bubbleSorter<int>* sorter1 = new bubbleSorter<int>();
 				if (Second == 2) {
-				
+
 					insertSorter<int>* sorter2 = new insertSorter<int>();
 					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Insertion Sorter:");
 					delete sorter1;
@@ -726,10 +726,10 @@ void selectSort(Sequence<T>* seq) {
 				}
 			}
 			if (First == 2) {
-				bubbleSorter<int>* sorter1 = new bubbleSorter<int>();
+				insertSorter<int>* sorter1 = new insertSorter<int>();
 				if (Second == 1) {
 
-					insertSorter<int>* sorter2 = new insertSorter<int>();
+					bubbleSorter<int>* sorter2 = new bubbleSorter<int>();
 					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Bubble Sorter:");
 					delete sorter1;
 					delete sorter2;
