@@ -24,7 +24,7 @@ protected:
 
 
 template <class T>
-// Пузырьковая сортировка
+// РџСѓР·С‹СЂСЊРєРѕРІР°СЏ РЎРѕСЂС‚РёСЂРѕРІРєР°
 class bubbleSorter : public ISorter<T> 
 {
 public:
@@ -58,7 +58,7 @@ public:
 
 
 template <class T>
-// Быстрая сортировка
+// Р‘С‹СЃС‚СЂР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°
 class quickSorter : public ISorter<T>
 {
 public:
@@ -102,7 +102,7 @@ public:
 			}
 		};
 
-		// Рекурсивный вызов
+		// ГђГҐГЄГіГ°Г±ГЁГўГ­Г»Г© ГўГ»Г§Г®Гў
 		if (left < j)
 			quickSort(arr, comp, left, j);
 		if (i < right)
@@ -113,7 +113,7 @@ public:
 
 
 template <class T>
-// Сортировка вставками
+// РЎРѕСЂС‚РёСЂРѕРІРєР° РІСЃС‚Р°РІРєР°РјРё
 class insertSorter : public ISorter<T>
 {
 public:
@@ -153,7 +153,7 @@ public:
 
 
 template <class T>
-// Сортировка простым выбором
+// РЎРѕСЂС‚РёСЂРѕРІРєР° РІС‹Р±РѕСЂРѕРј
 class selectSorter : public ISorter<T>
 {
 public:
@@ -190,7 +190,7 @@ public:
 
 
 template <class T>
-// Сотрировка Шелла
+// РЎРѕСЂС‚РёСЂРѕРІРєР° РЁРµР»Р»Р°
 class shellSorter : public ISorter<T>
 {
 public:
@@ -209,11 +209,10 @@ public:
 
 		int step, i, j;
 
-		// Выбор шага
+		// Р’С‹Р±РѕСЂ С€Р°РіР°
 		for (step = arr->GetSize() / 2; step > 0; step /= 2)
-			// Перечисление элементов, которые сортируются на определённом шаге
 			for (i = step; i < arr->GetSize(); i++) {
-				// Перестановка элементов внутри подмассива, пока i-тый не будет отсортирован
+				// РџРµСЂРµСЃС‚Р°РЅРѕРІРєР° СЌР»РµРјРµРЅС‚РѕРІ РІРЅСѓС‚СЂРё РїРѕРґРјР°СЃСЃРёРІР°, РїРѕРєР° i-С‚С‹Р№ РЅРµ Р±СѓРґРµС‚ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅ
 				++this->comparasions;
 				for (j = i - step; j >= 0 && (comp(arr->Get(j), arr->Get(j + step))); j -= step, ++this->comparasions)
 				{
@@ -226,7 +225,7 @@ public:
 	}
 };
 
-
+// РџРµСЂРµРјРµС€РёРІР°РЅРёРµ РјР°СЃСЃРёРІР°
 template <class T> 
 void shuffle(Sequence<T>* arr) {
 
