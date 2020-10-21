@@ -1,7 +1,7 @@
 #include <iostream>
-#include "BinaryTree.hpp"
+#include "BinaryTree.h"
 
-#include "NewMenu.hpp"
+#include "NewMenu.h"
 
 using namespace std;
 

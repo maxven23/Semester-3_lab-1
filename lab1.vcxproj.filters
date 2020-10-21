@@ -20,46 +20,46 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArraySequence.hpp">
+    <ClInclude Include="ArraySequence.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="BinaryTree.hpp">
+    <ClInclude Include="BinaryTree.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="DynamicArray.hpp">
+    <ClInclude Include="Comp.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Headers.hpp">
+    <ClInclude Include="DynamicArray.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.hpp">
+    <ClInclude Include="Headers.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ListSequence.hpp">
+    <ClInclude Include="LinkedList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.hpp">
+    <ClInclude Include="ListSequence.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Sequence.hpp">
+    <ClInclude Include="Menu.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Tests.hpp">
+    <ClInclude Include="NewMenu.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Sorts.hpp">
+    <ClInclude Include="Sequence.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.hpp">
+    <ClInclude Include="Sorts.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="NewMenu.hpp">
+    <ClInclude Include="Test.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Test.hpp">
+    <ClInclude Include="Tests.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Comp.hpp">
+    <ClInclude Include="Timer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
