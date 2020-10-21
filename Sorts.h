@@ -5,6 +5,11 @@
 template <class T>
 class ISorter {
 public:
+	long long comparasions;
+	long long iterations;
+
+	virtual long long getIter() = 0;
+	virtual long long getComp() = 0;
 
 	virtual void Sort(Sequence<T>* input, bool(*comp)(T, T)) = 0;
 
@@ -20,11 +25,20 @@ protected:
 
 template <class T>
 // Пузырьковая сортировка
-class bubbleSorter : ISorter<T> 
+class bubbleSorter : public ISorter<T> 
 {
 public:
-	int iterations = 0;
-	int comparisons = 0;
+	bubbleSorter() {
+		this->comparasions = 0;
+		this->iterations = 0;
+	}
+
+	long long getComp() {
+		return this->comparasions;
+	}
+	long long getIter() {
+		return this->iterations;
+	}
 
 	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
@@ -33,10 +47,10 @@ public:
 				if (comp(arr->Get(j), arr->Get(j + 1))) {
 
 					this->Swap(arr, j, j + 1);
-					++iterations;
+					++this->iterations;
 
 				}
-				++comparisons;
+				++this->comparasions;
 			}
 		}
 	}
@@ -45,11 +59,19 @@ public:
 
 template <class T>
 // Быстрая сортировка
-class quickSorter : ISorter<T>
+class quickSorter : public ISorter<T>
 {
 public:
-	int iterations;
-	int comparisons = 0;
+	quickSorter() {
+		this->comparasions = 0;
+		this->iterations = 0;
+	}
+	long long getComp() {
+		return this->comparasions;
+	}
+	long long getIter() {
+		return this->iterations;
+	}
 
 	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 		quickSort(arr, comp, 0, arr->GetSize() - 1);
@@ -63,17 +85,17 @@ public:
 
 		while (i <= j) {
 			while (!(comp(arr->Get(i), middle)) && !(arr->Get(i) == middle)) {
-				comparisons++;
+				this->comparasions++;
 				i++;
 			}
 			while ((comp(arr->Get(j), middle))) {
-				comparisons++;
+				this->comparasions++;
 				j--;
 			}
 			if (i <= j) {
 
 				this->Swap(arr, i, j);
-				iterations++;
+				this->iterations++;
 
 				i++;
 				j--;
@@ -92,11 +114,19 @@ public:
 
 template <class T>
 // Сортировка вставками
-class insertSorter : ISorter<T> 
+class insertSorter : public ISorter<T>
 {
 public:
-	int iterations = 0;
-	int comparisons = 0;
+	insertSorter() {
+		this->comparasions = 0;
+		this->iterations = 0;
+	}
+	long long getComp() {
+		return this->comparasions;
+	}
+	long long getIter() {
+		return this->iterations;
+	}
 
 	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
@@ -108,12 +138,12 @@ public:
 			temp = arr->Get(key);
 			for (int j = i + 1; j > 0; j--)
 			{
-				++comparisons;
+				++this->comparasions;
 				if (!(comp(temp, arr->Get(j - 1))) && !(temp == arr->Get(j - 1)))
 				{
 					arr->Set(j, arr->Get(j - 1));
 					key = j - 1;
-					++iterations;
+					++this->iterations;
 				}
 			}
 			arr->Set(key, temp);
@@ -124,11 +154,19 @@ public:
 
 template <class T>
 // Сортировка простым выбором
-class selectSorter : ISorter<T> 
+class selectSorter : public ISorter<T>
 {
 public:
-	int iterations = 0;
-	int comparisons = 0;
+	selectSorter() {
+		this->comparasions = 0;
+		this->iterations = 0;
+	}
+	long long getComp() {
+		return this->comparasions;
+	}
+	long long getIter() {
+		return this->iterations;
+	}
 
 	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
@@ -139,13 +177,13 @@ public:
 			for (int currentIndex = startIndex + 1; currentIndex < arr->GetSize(); ++currentIndex) {
 
 				if (!(comp(arr->Get(currentIndex), arr->Get(smallestIndex))) && !(arr->Get(currentIndex) == arr->Get(smallestIndex))) {
-					++comparisons;
+					++this->comparasions;
 					smallestIndex = currentIndex;
 				}
 			}
 
 			this->Swap(arr, startIndex, smallestIndex);
-			++iterations;
+			++this->iterations;
 		}
 	}
 };
@@ -153,11 +191,19 @@ public:
 
 template <class T>
 // Сотрировка Шелла
-class shellSorter : ISorter<T>
+class shellSorter : public ISorter<T>
 {
 public:
-	int iterations = 0;
-	int comparisons = 0;
+	shellSorter() {
+		this->comparasions = 0;
+		this->iterations = 0;
+	}
+	long long getComp() {
+		return this->comparasions;
+	}
+	long long getIter() {
+		return this->iterations;
+	}
 
 	void Sort(Sequence<T>* arr, bool(*comp)(T, T)) override {
 
@@ -168,12 +214,12 @@ public:
 			// Перечисление элементов, которые сортируются на определённом шаге
 			for (i = step; i < arr->GetSize(); i++) {
 				// Перестановка элементов внутри подмассива, пока i-тый не будет отсортирован
-				++comparisons;
-				for (j = i - step; j >= 0 && (comp(arr->Get(j), arr->Get(j + step))); j -= step, ++comparisons)
+				++this->comparasions;
+				for (j = i - step; j >= 0 && (comp(arr->Get(j), arr->Get(j + step))); j -= step, ++this->comparasions)
 				{
 
 					this->Swap(arr, j, j + step);
-					++iterations;
+					++this->iterations;
 
 				}
 			}

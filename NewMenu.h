@@ -26,7 +26,7 @@ void output(Sequence<T>* seq, int iter, int compor) {
 
 	cout << "      Number of elements: " << seq->GetSize() << endl;
 	cout << "      Number of iterations: " << iter << endl;
-	cout << "      Number of comparisons: " << compor << endl;
+	cout << "      Number of comparasions: " << compor << endl;
 
 }
 
@@ -160,6 +160,7 @@ void selectSortMenu() {
 	cout << "          " << endl;
 	cout << "          6. Print Array" << endl;
 	cout << "          7. Shuffle Array" << endl;
+	cout << "          8. Sort compare (Only for ArraySeq (temp))" << endl;
 	cout << "          " << endl;
 	cout << "          0. Exit" << endl;
 	cout << endl;
@@ -168,13 +169,60 @@ void selectSortMenu() {
 
 }
 
+
+template <class T>
+void sortComparasion(Sequence<T>* seq, ISorter<T>* sorter1, ISorter<T>* sorter2, string nameSort1, string nameSort2) {
+	system("cls");
+
+	ArraySequence<T>* seq_copy = new ArraySequence<T>(seq->GetSize());
+	for (int i = 0; i < seq->GetSize(); i++) {
+		seq_copy->Set(i, seq->Get(i));
+	}
+
+	Timer* timer1 = new Timer();
+	sorter1->Sort(seq, bigger);
+	double duration1 = timer1->Time();
+	delete timer1;
+
+	long long comp1 = sorter1->getComp();
+	long long iter1 = sorter1->getIter();
+
+
+	Timer* timer2 = new Timer();
+	sorter2->Sort(seq_copy, bigger);
+	double duration2 = timer2->Time();
+	delete timer2;
+
+	long long comp2 = sorter2->getComp();
+	long long iter2 = sorter2->getIter();
+
+	cout << endl;
+	cout << "Number of elements: " << seq->GetSize() << endl;
+	cout << endl;
+	cout << nameSort1 << endl;
+	cout << "Sorting Time: " << duration1 << " sec" << endl;
+	cout << "Number of Iterations: " << iter1 << endl;
+	cout << "Number of Comparasions: " << comp1 << endl;
+	cout << endl;
+	cout << "-----------------------" << endl;
+	cout << endl;
+	cout << nameSort2 << endl;
+	cout << "Sorting Time: " << duration2 << " sec" << endl;
+	cout << "Number of Iterations: " << iter2 << endl;
+	cout << "Number of Comparasions: " << comp2 << endl;
+	cout << endl;
+
+	delete seq_copy;
+	pressAnyButton();
+}
+
 template <class T>
 void selectSort(Sequence<T>* seq) {
 	
 	int CHOICE = -1;
 	int CHOICE1 = -1;
-	int iterations;
-	int comparisons;
+	long long iterations;
+	long long comparasions;
 
 	while (true) {
 		double duration;
@@ -229,14 +277,14 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = sorter->iterations;
-					comparisons = sorter->comparisons;
+					iterations = sorter->getIter();
+					comparasions = sorter->getComp();
 
 					sorterSeq(seq);
 					
 					cout << endl << "      bubbleSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -254,14 +302,14 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = sorter->iterations;
-					comparisons = sorter->comparisons;
+					iterations = sorter->getIter();
+					comparasions = sorter->getComp();
 
 					sorterSeq(seq);
 
 					cout << endl << "      bubbleSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -307,14 +355,14 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = insSorter->iterations;
-					comparisons = insSorter->comparisons;
+					iterations = insSorter->getIter();
+					comparasions = insSorter->getComp();
 
 					sorterSeq(seq);
 			
 					cout << endl << "      insertionSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -332,14 +380,14 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = insSorter->iterations;
-					comparisons = insSorter->comparisons;
+					iterations = insSorter->getIter();
+					comparasions = insSorter->getComp();
 
 					sorterSeq(seq);
 
 					cout << endl << "      insertionSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -386,14 +434,14 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = selSorter->iterations;
-					comparisons = selSorter->comparisons;
+					iterations = selSorter->getIter();
+					comparasions = selSorter->getComp();
 
 					sorterSeq(seq);
 
 					cout << endl << "      simpleSelectionSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -411,14 +459,14 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = selSorter->iterations;
-					comparisons = selSorter->comparisons;
+					iterations = selSorter->getIter();
+					comparasions = selSorter->getComp();
 
 					sorterSeq(seq);
 
 					cout << endl << "      simpleSelectionSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -465,14 +513,14 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = shSorter->iterations;
-					comparisons = shSorter->comparisons;
+					iterations = shSorter->getIter();
+					comparasions = shSorter->getComp();
 
 					sorterSeq(seq);
 
 					cout << endl << "      ShellSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -490,14 +538,14 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = shSorter->iterations;
-					comparisons = shSorter->comparisons;
+					iterations = shSorter->getIter();
+					comparasions = shSorter->getComp();
 
 					sorterSeq(seq);
 
 					cout << endl << "      ShellSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -544,8 +592,8 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = qSorter->iterations;
-					comparisons = qSorter->comparisons;
+					iterations = qSorter->getIter();
+					comparasions = qSorter->getComp();
 
 					coution();
 					sorterSeq(seq);
@@ -553,7 +601,7 @@ void selectSort(Sequence<T>* seq) {
 
 					cout << endl << "      quickSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -571,8 +619,8 @@ void selectSort(Sequence<T>* seq) {
 					duration = timer1->Time();
 					delete timer1;
 
-					iterations = qSorter->iterations;
-					comparisons = qSorter->comparisons;
+					iterations = qSorter->getIter();
+					comparasions = qSorter->getComp();
 
 					coution();
 					sorterSeq(seq);
@@ -580,7 +628,7 @@ void selectSort(Sequence<T>* seq) {
 
 					cout << endl << "      quickSort: " << endl << endl;
 					cout << "      Duration of sorting: " << duration << "sec" << endl;
-					output(seq, iterations, comparisons);
+					output(seq, iterations, comparasions);
 					coution();
 
 					pressAnyButton();
@@ -603,6 +651,204 @@ void selectSort(Sequence<T>* seq) {
 			shuffle(seq);
 
 			pressAnyButton();
+		}
+
+		else if (CHOICE == 8) {
+			system("cls");
+			int First = -1;
+			int Second = -1;
+
+			while (First == -1) {
+				system("cls");
+				cout << "Choose First Sorter: " << endl;
+				cout << "---------------------" << endl;
+				cout << "1. Bubble Sort" << endl;
+				cout << "2. Insertion Sort" << endl;
+				cout << "3. Selection Sort" << endl;
+				cout << "4. Shell Sort" << endl;
+				cout << "5. Quick Sort" << endl;
+				cout << "---------------------" << endl;
+				cout << "Input:  ";
+				cin >> First;
+
+				if (First < 0 || First > 5) {
+					First = -1;
+				}
+			}
+			while (Second == -1) {
+				system("cls");
+				cout << "Choose Second Sorter: " << endl;
+				cout << "---------------------" << endl;
+				cout << "1. Bubble Sort" << endl;
+				cout << "2. Insertion Sort" << endl;
+				cout << "3. Selection Sort" << endl;
+				cout << "4. Shell Sort" << endl;
+				cout << "5. Quick Sort" << endl;
+				cout << "---------------------" << endl;
+				cout << "Input:  ";
+				cin >> Second;
+
+				if (Second < 0 || Second > 5) {
+					Second = -1;
+				}
+			}
+			
+
+			if (First == 1) {
+				bubbleSorter<int>* sorter1 = new bubbleSorter<int>();
+				if (Second == 2) {
+				
+					insertSorter<int>* sorter2 = new insertSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Insertion Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 3) {
+					
+					selectSorter<int>* sorter2 = new selectSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Selection Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 4) {
+					
+					shellSorter<int>* sorter2 = new shellSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Shell Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 5) {
+					
+					quickSorter<int>* sorter2 = new quickSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Quick Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+			}
+			if (First == 2) {
+				bubbleSorter<int>* sorter1 = new bubbleSorter<int>();
+				if (Second == 1) {
+
+					insertSorter<int>* sorter2 = new insertSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Bubble Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 3) {
+
+					selectSorter<int>* sorter2 = new selectSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Selection Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 4) {
+
+					shellSorter<int>* sorter2 = new shellSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Shell Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 5) {
+
+					quickSorter<int>* sorter2 = new quickSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Quick Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+			}
+			if (First == 3) {
+				selectSorter<int>* sorter1 = new selectSorter<int>();
+				if (Second == 2) {
+
+					insertSorter<int>* sorter2 = new insertSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Insertion Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 1) {
+
+					bubbleSorter<int>* sorter2 = new bubbleSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Bubble Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 4) {
+
+					shellSorter<int>* sorter2 = new shellSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Shell Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 5) {
+
+					quickSorter<int>* sorter2 = new quickSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Quick Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+			}
+			if (First == 4) {
+				shellSorter<int>* sorter1 = new shellSorter<int>();
+				if (Second == 2) {
+
+					insertSorter<int>* sorter2 = new insertSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Insertion Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 3) {
+
+					selectSorter<int>* sorter2 = new selectSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Selection Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 1) {
+
+					bubbleSorter<int>* sorter2 = new bubbleSorter<int>();
+					sortComparasion(seq, sorter1, sorter2, "Shell Sorter:", "Bubble Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 5) {
+
+					quickSorter<int>* sorter2 = new quickSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Quick Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+			}
+			if (First == 5) {
+				quickSorter<int>* sorter1 = new quickSorter<int>();
+				if (Second == 2) {
+
+					insertSorter<int>* sorter2 = new insertSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Insertion Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 3) {
+
+					selectSorter<int>* sorter2 = new selectSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Selection Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 4) {
+
+					shellSorter<int>* sorter2 = new shellSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Shell Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+				else if (Second == 1) {
+
+					bubbleSorter<int>* sorter2 = new bubbleSorter<int>();
+					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Quick Sorter:");
+					delete sorter1;
+					delete sorter2;
+				}
+			}
 		}
 
 		else if (CHOICE == 0) {
@@ -747,7 +993,7 @@ void StartMenu() {
 			system("cls");
 			cout << endl;
 			cout << "         Closing . . ." << endl;
-			exit(0);
+			exit(1);
 
 		}
 
