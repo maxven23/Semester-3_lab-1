@@ -12,7 +12,7 @@ In this work are few (5) alg. of sorting:
   - Shell sort;
   - Quick sort;
   
-Every algorithme can get Comparasion function (bool) Comp(T, T) and Sequence<T>* seq; (It can be used for different types of input data)
+Every algorithme can get Comparasion function (bool) Comp(T, T) and Sequence<T>* seq; (It can be used for different types of sorting and input data)
 As result of working, you get:
   - Sorting time;
   - Number of sorted elements;
