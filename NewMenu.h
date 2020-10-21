@@ -171,54 +171,107 @@ void selectSortMenu() {
 
 
 template <class T>
-void sortComparasion(Sequence<T>* seq, ISorter<T>* sorter1, ISorter<T>* sorter2, string nameSort1, string nameSort2) {
+void sortComparasion(Sequence<T>* seq, ISorter<T>* sorter1, ISorter<T>* sorter2, string nameSort1, string nameSort2, string TYPE) {
 	system("cls");
 
-	ArraySequence<T>* seq_copy = new ArraySequence<T>(seq->GetSize());
-	for (int i = 0; i < seq->GetSize(); i++) {
-		seq_copy->Set(i, seq->Get(i));
+	ArraySequence<T>* seq_copyArr;
+	ListSequence<T>* seq_copyList;
+
+	if (TYPE == "ARRAY") {
+		seq_copyArr = new ArraySequence<T>(seq->GetSize());
+		for (int i = 0; i < seq->GetSize(); i++) {
+			seq_copyArr->Set(i, seq->Get(i));
+		}
+
+		Timer* timer1 = new Timer();
+		sorter1->Sort(seq, bigger);
+		double duration1 = timer1->Time();
+		delete timer1;
+
+		long long comp1 = sorter1->getComp();
+		long long iter1 = sorter1->getIter();
+
+
+		Timer* timer2 = new Timer();
+		sorter2->Sort(seq_copyArr, bigger);
+		double duration2 = timer2->Time();
+		delete timer2;
+
+		long long comp2 = sorter2->getComp();
+		long long iter2 = sorter2->getIter();
+
+		cout << endl;
+		cout << " Number of elements: " << seq->GetSize() << endl;
+		cout << endl;
+		cout << " " << nameSort1 << endl;
+		cout << "   Sorting Time: " << duration1 << " sec" << endl;
+		cout << "   Number of Iterations: " << iter1 << endl;
+		cout << "   Number of Comparasions: " << comp1 << endl;
+		cout << endl;
+		cout << "-----------------------" << endl;
+		cout << endl;
+		cout << " " << nameSort2 << endl;
+		cout << "   Sorting Time: " << duration2 << " sec" << endl;
+		cout << "   Number of Iterations: " << iter2 << endl;
+		cout << "   Number of Comparasions: " << comp2 << endl;
+		cout << endl;
+
+		delete seq_copyArr;
+		delete seq_copyList;
+
+		pressAnyButton();
 	}
 
-	Timer* timer1 = new Timer();
-	sorter1->Sort(seq, bigger);
-	double duration1 = timer1->Time();
-	delete timer1;
+	else {
+		seq_copyList = new ListSequence<T>();
+		for (int i = 0; i < seq->GetSize(); i++) {
+			seq_copyList->Prepend(seq->Get(i));
+		}
 
-	long long comp1 = sorter1->getComp();
-	long long iter1 = sorter1->getIter();
+		Timer* timer1 = new Timer();
+		sorter1->Sort(seq, bigger);
+		double duration1 = timer1->Time();
+		delete timer1;
+
+		long long comp1 = sorter1->getComp();
+		long long iter1 = sorter1->getIter();
 
 
-	Timer* timer2 = new Timer();
-	sorter2->Sort(seq_copy, bigger);
-	double duration2 = timer2->Time();
-	delete timer2;
+		Timer* timer2 = new Timer();
+		sorter2->Sort(seq_copyList, bigger);
+		double duration2 = timer2->Time();
+		delete timer2;
 
-	long long comp2 = sorter2->getComp();
-	long long iter2 = sorter2->getIter();
+		long long comp2 = sorter2->getComp();
+		long long iter2 = sorter2->getIter();
 
-	cout << endl;
-	cout << " Number of elements: " << seq->GetSize() << endl;
-	cout << endl;
-	cout << " " << nameSort1 << endl;
-	cout << "   Sorting Time: " << duration1 << " sec" << endl;
-	cout << "   Number of Iterations: " << iter1 << endl;
-	cout << "   Number of Comparasions: " << comp1 << endl;
-	cout << endl;
-	cout << "-----------------------" << endl;
-	cout << endl;
-	cout << "  " << nameSort2 << endl;
-	cout << "   Sorting Time: " << duration2 << " sec" << endl;
-	cout << "   Number of Iterations: " << iter2 << endl;
-	cout << "   Number of Comparasions: " << comp2 << endl;
-	cout << endl;
+		cout << endl;
+		cout << " Number of elements: " << seq->GetSize() << endl;
+		cout << endl;
+		cout << " " << nameSort1 << endl;
+		cout << "   Sorting Time: " << duration1 << " sec" << endl;
+		cout << "   Number of Iterations: " << iter1 << endl;
+		cout << "   Number of Comparasions: " << comp1 << endl;
+		cout << endl;
+		cout << "-----------------------" << endl;
+		cout << endl;
+		cout << " " << nameSort2 << endl;
+		cout << "   Sorting Time: " << duration2 << " sec" << endl;
+		cout << "   Number of Iterations: " << iter2 << endl;
+		cout << "   Number of Comparasions: " << comp2 << endl;
+		cout << endl;
 
-	delete seq_copy;
-	pressAnyButton();
+		delete seq_copyArr;
+		delete seq_copyList;
+
+		pressAnyButton();
+	}
 }
 
 template <class T>
-void selectSort(Sequence<T>* seq) {
+void selectSort(Sequence<T>* seq, string TYPE) {
 	
+	string Type = TYPE;
 	int CHOICE = -1;
 	int CHOICE1 = -1;
 	long long iterations;
@@ -675,6 +728,7 @@ void selectSort(Sequence<T>* seq) {
 					First = -1;
 				}
 			}
+
 			while (Second == -1) {
 				system("cls");
 				cout << "Choose Second Sorter: " << endl;
@@ -696,158 +750,164 @@ void selectSort(Sequence<T>* seq) {
 
 			if (First == 1) {
 				bubbleSorter<int>* sorter1 = new bubbleSorter<int>();
+
 				if (Second == 2) {
 
 					insertSorter<int>* sorter2 = new insertSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Insertion Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Insertion Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 3) {
 					
 					selectSorter<int>* sorter2 = new selectSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Selection Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Selection Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 4) {
 					
 					shellSorter<int>* sorter2 = new shellSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Shell Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Shell Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 5) {
 					
 					quickSorter<int>* sorter2 = new quickSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Quick Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Quick Sorter:", Type);
+					
 					delete sorter2;
 				}
+				delete sorter1;
 			}
 			if (First == 2) {
 				insertSorter<int>* sorter1 = new insertSorter<int>();
 				if (Second == 1) {
 
 					bubbleSorter<int>* sorter2 = new bubbleSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Bubble Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Bubble Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 3) {
 
 					selectSorter<int>* sorter2 = new selectSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Selection Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Selection Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 4) {
 
 					shellSorter<int>* sorter2 = new shellSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Shell Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Bubble Sorter:", "Shell Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 5) {
 
 					quickSorter<int>* sorter2 = new quickSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Quick Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Insertion Sorter:", "Quick Sorter:", Type);
+					
 					delete sorter2;
 				}
+				delete sorter1;
 			}
 			if (First == 3) {
 				selectSorter<int>* sorter1 = new selectSorter<int>();
 				if (Second == 2) {
 
 					insertSorter<int>* sorter2 = new insertSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Insertion Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Insertion Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 1) {
 
 					bubbleSorter<int>* sorter2 = new bubbleSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Bubble Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Bubble Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 4) {
 
 					shellSorter<int>* sorter2 = new shellSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Shell Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Shell Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 5) {
 
 					quickSorter<int>* sorter2 = new quickSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Quick Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Selection Sorter:", "Quick Sorter:", Type);
+					
 					delete sorter2;
 				}
+				delete sorter1;
 			}
 			if (First == 4) {
 				shellSorter<int>* sorter1 = new shellSorter<int>();
 				if (Second == 2) {
 
 					insertSorter<int>* sorter2 = new insertSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Insertion Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Insertion Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 3) {
 
 					selectSorter<int>* sorter2 = new selectSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Selection Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Selection Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 1) {
 
 					bubbleSorter<int>* sorter2 = new bubbleSorter<int>();
-					sortComparasion(seq, sorter1, sorter2, "Shell Sorter:", "Bubble Sorter:");
-					delete sorter1;
+					sortComparasion(seq, sorter1, sorter2, "Shell Sorter:", "Bubble Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 5) {
 
 					quickSorter<int>* sorter2 = new quickSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Quick Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Shell Sorter:", "Quick Sorter:", Type);
+
 					delete sorter2;
 				}
+				delete sorter1;
 			}
 			if (First == 5) {
 				quickSorter<int>* sorter1 = new quickSorter<int>();
 				if (Second == 2) {
 
 					insertSorter<int>* sorter2 = new insertSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Insertion Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Insertion Sorter:", Type);
+					
 					delete sorter2;
 				}
 				else if (Second == 3) {
 
 					selectSorter<int>* sorter2 = new selectSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Selection Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Selection Sorter:", Type);
+	
 					delete sorter2;
 				}
 				else if (Second == 4) {
 
 					shellSorter<int>* sorter2 = new shellSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Shell Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Shell Sorter:", Type);
+
 					delete sorter2;
 				}
 				else if (Second == 1) {
 
 					bubbleSorter<int>* sorter2 = new bubbleSorter<int>();
-					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Quick Sorter:");
-					delete sorter1;
+					sortComparasion<int>(seq, sorter1, sorter2, "Quick Sorter:", "Bubble Sorter:", Type);
+
 					delete sorter2;
 				}
+				delete sorter1;
 			}
 		}
 
@@ -1049,7 +1109,7 @@ void StartMenu() {
 							NEXT = creatingMenu<int>(arr);
 
 							if (NEXT == 0) {
-								selectSort(arr);
+								selectSort(arr, "ARRAY");
 							}
 
 							delete arr;
@@ -1061,7 +1121,7 @@ void StartMenu() {
 							NEXT = creatingMenuList<int>(seq, SIZE);
 
 							if (NEXT == 0) {
-								selectSort(seq);
+								selectSort(seq, "LIST");
 							}
 
 							delete seq;
